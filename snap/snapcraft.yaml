@@ -1,0 +1,33 @@
+name: umoria
+summary: A roguelike dungeon crawler
+description: |
+  The game of Umoria is a single player dungeon simulation.
+  Starting at the town level, you begin your adventure by stocking
+  up on supplies - weapons, armour, and magical devices - from the
+  various stores. After preparing for your adventure, you descend
+  into the Dungeons of Moria where fantastic adventures await!
+version: 5.7.15
+base: core22
+architectures:
+- amd64
+confinement: strict
+grade: stable
+
+apps:
+  umoria:
+    command: umoria/umoria
+
+parts:
+  umoria:
+    source: https://github.com/dungeons-of-moria/umoria.git
+    plugin: nil
+    build-packages:
+      - cmake
+      - libgcc-11-dev
+      - libncurses-dev
+    override-build: |
+      craftctl default
+      cmake ../src
+      make
+      mkdir -p $CRAFT_PART_INSTALL/umoria
+      cp -r umoria/* $CRAFT_PART_INSTALL/umoria
