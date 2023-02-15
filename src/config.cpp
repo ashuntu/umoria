@@ -22,6 +22,13 @@ namespace config {
         const std::string death_royal = "data/death_royal.txt";
         std::string scores = "scores.dat";
         std::string save_game = "game.sav";
+
+        void initializeFilePaths() {
+            if (std::getenv("SNAP")) {
+                scores = std::getenv("SNAP_USER_COMMON") + std::string("/") + scores;
+                save_game = std::getenv("SNAP_USER_COMMON") + std::string("/") + save_game;
+            }
+        }
     } // namespace files
 
     // Game options as set on startup and with `=` set options command -CJS-

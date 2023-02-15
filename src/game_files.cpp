@@ -6,8 +6,6 @@
 // Misc code to access files used by Moria
 
 #include "headers.h"
-#include <cstring>
-#include <string>
 
 // This must be included after fcntl.h, which has a prototype for `open' on some
 // systems.  Otherwise, the `open' prototype conflicts with the `topen' declaration.
@@ -18,10 +16,6 @@
 //  so we don't have multiple people trying to write to it at the same time.
 //  Craig Norborg (doc)    Mon Aug 10 16:41:59 EST 1987
 bool initializeScoreFile() {
-    if (std::getenv("SNAP")) {
-        config::files::scores = std::getenv("SNAP_USER_COMMON") + std::string("/") + config::files::scores;
-        config::files::save_game = std::getenv("SNAP_USER_COMMON") + std::string("/") + config::files::save_game;
-    }
     highscore_fp = fopen(config::files::scores.c_str(), (char *) "rb+");
 
     return highscore_fp != nullptr;

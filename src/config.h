@@ -21,6 +21,8 @@ namespace config {
         extern const std::string death_royal;
         extern std::string scores;
         extern std::string save_game;
+
+        void initializeFilePaths();
     }
 
     namespace options {
