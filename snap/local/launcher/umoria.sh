@@ -2,9 +2,10 @@
 #
 #
 
-if [ ! -f $SNAP_USER_COMMON/umoria/scores.dat ]; then
-  mkdir -p $SNAP_USER_COMMON/umoria
-  cp $SNAP/scores.dat $SNAP_USER_COMMON/umoria/
+if [ ! -f $SNAP_USER_COMMON/scores.dat ]; then
+  mkdir -p $SNAP_USER_COMMON
+  cp $SNAP/scores.dat $SNAP_USER_COMMON/
 fi
 
-exec $SNAP/umoria $@
+cd $SNAP
+exec ./umoria $@
