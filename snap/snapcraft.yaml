@@ -15,11 +15,20 @@ grade: stable
 
 apps:
   umoria:
-    command: umoria/umoria
+    command: umoria.sh
+    plugs:
+      - home
 
 parts:
+  launcher:
+    plugin: nil
+    source: ./snap/local/launcher
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL
+      cp -p umoria.sh $CRAFT_PART_INSTALL/
+
   umoria:
-    source: https://github.com/dungeons-of-moria/umoria.git
+    source: .
     plugin: nil
     build-packages:
       - cmake
@@ -29,5 +38,6 @@ parts:
       craftctl default
       cmake ../src
       make
-      mkdir -p $CRAFT_PART_INSTALL/umoria
-      cp -r umoria/* $CRAFT_PART_INSTALL/umoria
+      mkdir -p $CRAFT_PART_INSTALL/
+      cp -rp umoria/* $CRAFT_PART_INSTALL/
+      cp data/scores.dat $CRAFT_PART_INSTALL/
